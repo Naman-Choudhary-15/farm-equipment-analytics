@@ -48,19 +48,15 @@ def ensure_dataset():
 
 ensure_dataset()
 
-# --- CUSTOM CSS: LEAVEFLOW-INSPIRED MODERN SAAS DESIGN ---
+# --- HIGH-CONTRAST CSS FIX: GUARANTEES MAXIMUM READABILITY ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    /* Clean light background */
-    .stApp {
-        background-color: #f8fafc;
-        color: #0f172a;
+    html, body, [class*="css"], .stApp {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        background-color: #f8fafc !important;
+        color: #0f172a !important;
     }
     
     /* Hide Streamlit default header, deploy button, footer */
@@ -68,19 +64,101 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Sidebar Styling - Clean Light Minimalist */
+    /* 1. SIDEBAR: HIGH-CONTRAST READABLE TEXT & WHITE BACKGROUND */
     [data-testid="stSidebar"] {
-        background-color: #ffffff;
-        border-right: 1px solid #e2e8f0;
-        box-shadow: 2px 0 6px rgba(0,0,0,0.02);
+        background-color: #ffffff !important;
+        border-right: 1px solid #e2e8f0 !important;
+    }
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3 {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] div {
+        color: #1e293b !important;
+    }
+    [data-testid="stSidebar"] .stCaption {
+        color: #475569 !important;
+        font-size: 0.8rem !important;
     }
     
-    /* Top Navbar header container */
+    /* 2. FORM LABELS (Category, Season, Engine Load) - FORCE HIGH CONTRAST */
+    div[data-testid="stWidgetLabel"] label,
+    div[data-testid="stWidgetLabel"] p,
+    div[data-testid="stWidgetLabel"] span {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* 3. MULTISELECT DROPDOWNS & TAG PILLS */
+    div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        color: #0f172a !important;
+    }
+    /* The individual selected pills inside dropdown */
+    div[data-baseweb="tag"] {
+        background-color: #eff6ff !important;
+        border: 1px solid #bfdbfe !important;
+        border-radius: 6px !important;
+    }
+    div[data-baseweb="tag"] span {
+        color: #1d4ed8 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* 4. SLIDER VISIBILITY */
+    div[data-testid="stSlider"] div[data-testid="stMarkdownContainer"] p {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+    div[data-testid="stSlider"] [role="slider"] {
+        background-color: #2563eb !important;
+    }
+    
+    /* 5. TABS: CLEAR VISIBLE LABELS AND CLEAN HIGHLIGHTS */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background-color: #e2e8f0;
+        padding: 5px;
+        border-radius: 10px;
+        border-bottom: none;
+    }
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+        color: #334155 !important;
+        background-color: transparent;
+        border: none;
+    }
+    .stTabs [data-baseweb="tab"] p,
+    .stTabs [data-baseweb="tab"] span {
+        color: #334155 !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #ffffff !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .stTabs [aria-selected="true"] p,
+    .stTabs [aria-selected="true"] span {
+        color: #2563eb !important;
+        font-weight: 700 !important;
+    }
+    
+    /* 6. TOP NAVBAR */
     .nav-bar {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 12px 0px 20px 0px;
+        padding: 10px 0px 18px 0px;
         border-bottom: 1px solid #e2e8f0;
         margin-bottom: 20px;
     }
@@ -91,7 +169,7 @@ st.markdown("""
     }
     .brand-logo {
         background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: white;
+        color: #ffffff;
         font-weight: 800;
         font-size: 1.25rem;
         width: 38px;
@@ -103,8 +181,8 @@ st.markdown("""
         box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
     }
     .brand-title {
-        font-size: 1.3rem;
-        font-weight: 700;
+        font-size: 1.35rem;
+        font-weight: 800;
         color: #0f172a;
         letter-spacing: -0.5px;
     }
@@ -113,12 +191,12 @@ st.markdown("""
         align-items: center;
         gap: 10px;
         background: #ffffff;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
         padding: 6px 14px;
         border-radius: 9999px;
         font-size: 0.85rem;
-        font-weight: 600;
-        color: #334155;
+        font-weight: 700;
+        color: #0f172a;
     }
     .user-avatar {
         background: #eff6ff;
@@ -129,21 +207,19 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 0.75rem;
     }
     
-    /* Breadcrumbs */
+    /* 7. HERO WELCOME CARD */
     .breadcrumbs {
         font-size: 0.75rem;
-        font-weight: 700;
-        color: #64748b;
+        font-weight: 800;
+        color: #475569;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-bottom: 4px;
     }
-    
-    /* Hero Welcome Banner */
     .hero-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -158,14 +234,14 @@ st.markdown("""
     }
     .hero-tag {
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 800;
         color: #2563eb;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         margin-bottom: 6px;
     }
     .hero-title {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
         font-weight: 800;
         color: #0f172a;
         margin: 0 0 6px 0;
@@ -173,11 +249,12 @@ st.markdown("""
     }
     .hero-subtitle {
         font-size: 0.95rem;
-        color: #64748b;
+        color: #475569;
         margin: 0;
+        font-weight: 500;
     }
     
-    /* LeaveFlow Metric Cards */
+    /* 8. METRIC CARDS */
     .metric-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -186,111 +263,84 @@ st.markdown("""
         display: flex;
         align-items: center;
         gap: 16px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .metric-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
     .metric-icon-box {
-        width: 44px;
-        height: 44px;
+        width: 46px;
+        height: 46px;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         flex-shrink: 0;
-    }
-    .metric-details {
-        flex-grow: 1;
     }
     .metric-label {
         font-size: 0.8rem;
-        font-weight: 600;
-        color: #64748b;
+        font-weight: 700;
+        color: #475569;
         margin-bottom: 2px;
     }
     .metric-value {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
         font-weight: 800;
         color: #0f172a;
         line-height: 1.2;
     }
     .metric-subtext {
         font-size: 0.75rem;
-        color: #94a3b8;
-        font-weight: 500;
+        color: #64748b;
+        font-weight: 600;
         margin-top: 2px;
     }
     
-    /* Content Card wrapper */
+    /* 9. CONTENT CARDS */
     .content-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 16px;
         padding: 22px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         height: 100%;
     }
     .card-header-tag {
-        font-size: 0.7rem;
-        font-weight: 700;
-        color: #64748b;
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: #475569;
         text-transform: uppercase;
         letter-spacing: 0.08em;
     }
     .card-title {
-        font-size: 1.15rem;
-        font-weight: 700;
+        font-size: 1.2rem;
+        font-weight: 800;
         color: #0f172a;
         margin: 2px 0 16px 0;
     }
     
-    /* Status Badge Pills */
+    /* 10. STATUS BADGE PILLS */
     .status-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 3px 10px;
+        padding: 4px 10px;
         border-radius: 9999px;
         font-size: 0.75rem;
-        font-weight: 600;
+        font-weight: 700;
     }
     .status-pill-green {
         background-color: #ecfdf5;
-        color: #059669;
+        color: #047857;
+        border: 1px solid #a7f3d0;
     }
     .status-pill-amber {
         background-color: #fffbeb;
-        color: #d97706;
+        color: #b45309;
+        border: 1px solid #fde68a;
     }
     .status-pill-red {
         background-color: #fef2f2;
-        color: #dc2626;
-    }
-    
-    /* Custom Streamlit Tab bar */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background-color: #f1f5f9;
-        padding: 4px;
-        border-radius: 10px;
-        border-bottom: none;
-    }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-weight: 600;
-        color: #64748b;
-        background-color: transparent;
-        border: none;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #ffffff !important;
-        color: #2563eb !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        color: #b91c1c;
+        border: 1px solid #fecaca;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -311,13 +361,11 @@ st.markdown("""
 <div class="nav-bar">
     <div class="brand-container">
         <div class="brand-logo">A</div>
-        <div>
-            <div class="brand-title">AgriFlow</div>
-        </div>
+        <div class="brand-title">AgriFlow</div>
     </div>
     <div style="display: flex; align-items: center; gap: 12px;">
         <div class="user-pill">
-            <span style="color:#64748b; font-weight:500;">STUDENT</span>
+            <span style="color:#64748b; font-weight:600;">STUDENT</span>
             <div class="user-avatar">N</div>
             <span>Naman Choudhary</span>
         </div>
@@ -347,8 +395,8 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("""
-    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px; font-size:0.8rem; color:#475569;">
-        <strong>Project Context:</strong><br>
+    <div style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:10px; padding:12px; font-size:0.82rem; color:#0f172a;">
+        <strong style="color:#0f172a;">Project Context:</strong><br>
         • Course: Foundation of Data Science<br>
         • Institute: NIET Greater Noida<br>
         • SDG 2: Zero Hunger
@@ -377,10 +425,10 @@ st.markdown("""
         <p class="hero-subtitle">Farm equipment telemetry at a glance. Track operational efficiency, fuel metrics, and machine health alerts.</p>
     </div>
     <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-        <span style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-size: 0.8rem; font-weight: 700; padding: 6px 14px; border-radius: 9999px;">
+        <span style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 0.8rem; font-weight: 700; padding: 6px 14px; border-radius: 9999px;">
             ● Telemetry Stream Active
         </span>
-        <span style="font-size: 0.75rem; color: #94a3b8;">500 In-field Machine Sensors</span>
+        <span style="font-size: 0.75rem; color: #475569; font-weight: 600;">500 In-field Machine Sensors</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -412,7 +460,7 @@ with m2:
         <div class="metric-icon-box" style="background:#fef3c7; color:#d97706;">⏱️</div>
         <div class="metric-details">
             <div class="metric-label">Idle Time</div>
-            <div class="metric-value">{total_idle:,.0f} <span style="font-size:1rem; font-weight:600; color:#d97706;">hrs</span></div>
+            <div class="metric-value">{total_idle:,.0f} <span style="font-size:1rem; font-weight:700; color:#b45309;">hrs</span></div>
             <div class="metric-subtext">{idle_pct:.1f}% idle loss ratio</div>
         </div>
     </div>
@@ -424,14 +472,14 @@ with m3:
         <div class="metric-icon-box" style="background:#ecfdf5; color:#059669;">⛽</div>
         <div class="metric-details">
             <div class="metric-label">Fuel Usage</div>
-            <div class="metric-value">{total_fuel:,.0f} <span style="font-size:1rem; font-weight:600; color:#059669;">L</span></div>
+            <div class="metric-value">{total_fuel:,.0f} <span style="font-size:1rem; font-weight:700; color:#047857;">L</span></div>
             <div class="metric-subtext">Cumulative consumption</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with m4:
-    alert_color = "#dc2626" if alert_count > 0 else "#059669"
+    alert_color = "#b91c1c" if alert_count > 0 else "#047857"
     alert_bg = "#fef2f2" if alert_count > 0 else "#ecfdf5"
     alert_sub = "Inspection required" if alert_count > 0 else "All systems nominal"
     st.markdown(f"""
@@ -454,7 +502,7 @@ tab_overview, tab_charts, tab_alerts = st.tabs([
     "🚨 Predictive Maintenance Queue"
 ])
 
-# --- TAB 1: ACTIVITY & BREAKDOWN (LEAVEFLOW LAYOUT) ---
+# --- TAB 1: ACTIVITY & BREAKDOWN ---
 with tab_overview:
     col_left, col_right = st.columns([1.7, 1])
     
@@ -465,10 +513,8 @@ with tab_overview:
             <div class="card-title">Recent Equipment Activity</div>
         """, unsafe_allow_html=True)
         
-        # Display clean formatted table matching the reference card style
         recent_df = filtered_df.sort_values('Date', ascending=False).head(7).copy()
         
-        # Create friendly formatted rows
         display_rows = []
         for _, row in recent_df.iterrows():
             maint_status = row['Maintenance_Required']
@@ -482,16 +528,16 @@ with tab_overview:
             display_rows.append(f"""
             <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 6px; border-bottom:1px solid #f1f5f9;">
                 <div style="display:flex; align-items:center; gap:14px;">
-                    <span style="font-size:0.8rem; font-weight:700; color:#2563eb; background:#eff6ff; padding:4px 8px; border-radius:6px;">#{row['Machine_ID']}</span>
+                    <span style="font-size:0.8rem; font-weight:700; color:#1d4ed8; background:#eff6ff; padding:4px 8px; border-radius:6px; border:1px solid #bfdbfe;">#{row['Machine_ID']}</span>
                     <div>
-                        <div style="font-weight:700; color:#0f172a; font-size:0.9rem;">{row['Machine_Type']}</div>
-                        <div style="font-size:0.75rem; color:#94a3b8;">{row['Date'].strftime('%d %b %Y')} • {row['Season']}</div>
+                        <div style="font-weight:700; color:#0f172a; font-size:0.92rem;">{row['Machine_Type']}</div>
+                        <div style="font-size:0.75rem; color:#475569; font-weight:500;">{row['Date'].strftime('%d %b %Y')} • {row['Season']}</div>
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:20px;">
                     <div style="text-align:right;">
-                        <span style="font-size:0.85rem; font-weight:700; color:#0f172a;">{row['Fuel_Consumption_Liters']:.1f} L</span>
-                        <div style="font-size:0.7rem; color:#64748b;">Load: {row['Engine_Load_Percent']:.0f}%</div>
+                        <span style="font-size:0.85rem; font-weight:800; color:#0f172a;">{row['Fuel_Consumption_Liters']:.1f} L</span>
+                        <div style="font-size:0.72rem; color:#475569; font-weight:600;">Load: {row['Engine_Load_Percent']:.0f}%</div>
                     </div>
                     {badge}
                 </div>
@@ -508,7 +554,6 @@ with tab_overview:
             <div class="card-title">Machine Condition Share</div>
         """, unsafe_allow_html=True)
         
-        # Donut Chart exactly matching the LeaveFlow bottom right ring chart!
         cond_counts = filtered_df['Maintenance_Required'].value_counts()
         labels = ['Optimal Condition', 'Maintenance Needed']
         values = [cond_counts.get('No', 0), cond_counts.get('Yes', 0)]
@@ -525,19 +570,21 @@ with tab_overview:
         
         fig_donut.update_layout(
             showlegend=True,
-            legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5),
+            legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5, font=dict(color="#0f172a", size=11)),
             margin=dict(t=10, b=30, l=10, r=10),
             height=260,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
             annotations=[dict(
-                text=f"<b>{len(filtered_df)}</b><br><span style='font-size:12px;color:#64748b'>assets</span>",
+                text=f"<b style='color:#0f172a;'>{len(filtered_df)}</b><br><span style='font-size:12px;color:#475569;'>assets</span>",
                 x=0.5, y=0.5, font_size=20, showarrow=False
             )]
         )
         st.plotly_chart(fig_donut, use_container_width=True)
         
         st.markdown(f"""
-        <div style="margin-top:14px; padding-top:12px; border-top:1px solid #f1f5f9; font-size:0.75rem; color:#64748b;">
-            Summary of {len(filtered_df)} filtered machinery units across operational zones.
+        <div style="margin-top:14px; padding-top:12px; border-top:1px solid #f1f5f9; font-size:0.78rem; color:#475569; font-weight:500;">
+            Summary of <b>{len(filtered_df)}</b> filtered machinery units across operational zones.
         </div>
         </div>
         """, unsafe_allow_html=True)
@@ -565,7 +612,7 @@ with tab_charts:
         fig_bar.update_layout(
             margin=dict(t=10, b=20, l=10, r=10),
             legend_title_text="",
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(color="#0f172a")),
             height=300
         )
         st.plotly_chart(fig_bar, use_container_width=True)
@@ -589,7 +636,7 @@ with tab_charts:
         )
         fig_scatter.update_layout(
             margin=dict(t=10, b=20, l=10, r=10),
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(color="#0f172a")),
             height=300
         )
         st.plotly_chart(fig_scatter, use_container_width=True)
@@ -602,7 +649,7 @@ with tab_charts:
     <div class="content-card">
         <div class="card-header-tag">INTERACTIVE MULTIDIMENSIONAL SENSORS</div>
         <div class="card-title">3D Telemetry Spatial Matrix (Idle vs Load vs Fuel)</div>
-        <p style="font-size:0.85rem; color:#64748b; margin-top:-10px;">Click and drag to rotate, pinch to zoom. Visualizes multi-sensor telematics correlation.</p>
+        <p style="font-size:0.85rem; color:#475569; margin-top:-10px; font-weight:500;">Click and drag to rotate, pinch to zoom. Visualizes multi-sensor telematics correlation.</p>
     """, unsafe_allow_html=True)
     
     fig_3d = px.scatter_3d(
@@ -629,7 +676,7 @@ with tab_alerts:
     <div class="content-card">
         <div class="card-header-tag">SYSTEM ALERTS</div>
         <div class="card-title">Predictive Maintenance Queue</div>
-        <p style="font-size:0.85rem; color:#64748b; margin-top:-10px;">
+        <p style="font-size:0.85rem; color:#475569; margin-top:-10px; font-weight:500;">
             Telemetry algorithms flag units exceeding 85% engine load thresholds or having abnormal idle fuel dissipation.
         </p>
     """, unsafe_allow_html=True)
